@@ -1,0 +1,834 @@
+<!doctype html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>La Paila de Mi Abuela — Sabor del Pacífico</title>
+<meta name="description" content="Comida tradicional del Chocó. Pide online, reserva mesa y descubre nuestros combos. Quibdó, Colombia."/>
+<meta property="og:title" content="La Paila de Mi Abuela — Sabor del Pacífico"/>
+<meta property="og:image" content="Promocion.jpg"/>
+<meta name="theme-color" content="#21321a"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Restaurant","name":"La Paila de Mi Abuela","telephone":"+573106684360","address":{"@type":"PostalAddress","streetAddress":"Cra 7 # 45-10","addressLocality":"Quibdó","addressRegion":"Chocó","addressCountry":"CO"},"servesCuisine":["Colombiana","Pacífico"],"priceRange":"$$","openingHours":"Mo-Su 11:00-22:00"}</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script defer src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+/* NAV */
+.navbar{position:sticky;top:0;z-index:80;background:rgba(6,16,10,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--bdr);height:68px;display:flex;align-items:center}
+[data-theme="light"] .navbar{background:rgba(245,250,245,.93)}
+[data-theme="pacific"] .navbar{background:rgba(10,30,44,.9)}
+.nav-in{max-width:var(--max);margin:0 auto;width:100%;padding:0 20px;display:flex;align-items:center;gap:10px}
+.nav-logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.nav-logo img{width:42px;height:42px;object-fit:cover;border-radius:10px}
+.nav-brand{font-family:'Playfair Display',serif;font-size:16px;font-weight:700}
+.nav-tag{font-size:10px;color:var(--muted)}
+.nav-links{display:flex;gap:2px;margin-left:auto}
+@media(max-width:768px){.nav-links{display:none}}
+.nav-link{padding:8px 12px;border-radius:10px;font-size:13px;font-weight:500;color:var(--textm);transition:all .18s}
+.nav-link:hover{background:rgba(116,196,118,.1);color:var(--g2)}
+.nav-right{display:flex;gap:8px;align-items:center;margin-left:12px}
+.user-pill{padding:5px 11px;border-radius:999px;background:rgba(116,196,118,.1);border:1px solid rgba(116,196,118,.2);font-size:11px;font-weight:600;color:var(--g2);white-space:nowrap}
+@media(max-width:480px){.user-pill{display:none}}
+.ham{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;border:none;background:none;margin-left:auto}
+@media(max-width:768px){.ham{display:flex}}
+.ham span{width:22px;height:2px;background:var(--text);border-radius:2px;transition:all .3s}
+.ham.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.ham.open span:nth-child(2){opacity:0}
+.ham.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.mob-menu{position:fixed;top:68px;left:0;right:0;background:rgba(6,16,10,.97);backdrop-filter:blur(16px);z-index:79;transform:translateY(-110%);transition:transform .35s cubic-bezier(.2,.9,.2,1);padding:14px 18px;display:flex;flex-direction:column;gap:3px;border-bottom:1px solid var(--bdr)}
+[data-theme="light"] .mob-menu{background:rgba(245,250,245,.97)}
+.mob-menu.open{transform:translateY(0)}
+.mob-menu a{padding:12px 16px;border-radius:12px;font-size:15px;font-weight:500;color:var(--text);transition:all .18s}
+.mob-menu a:hover{background:rgba(116,196,118,.1);color:var(--g2)}
+
+/* SLIDER */
+.slider-wrap{max-width:var(--max);margin:18px auto;padding:0 16px}
+.slider-outer{position:relative;border-radius:22px;overflow:hidden;box-shadow:var(--shadow)}
+.s-track{display:flex;transition:transform .65s cubic-bezier(.22,.9,.2,1)}
+.slide{flex:0 0 100%;position:relative}
+.slide img{width:100%;height:420px;object-fit:cover;display:block}
+@media(max-width:640px){.slide img{height:220px}}
+.slide-ov{position:absolute;inset:0;background:linear-gradient(120deg,rgba(0,0,0,.6) 0%,transparent 65%)}
+.slide-cnt{position:absolute;bottom:0;left:0;right:0;padding:24px 30px}
+.slide-badge{display:inline-block;padding:4px 14px;border-radius:999px;font-size:11px;font-weight:700;margin-bottom:8px;background:var(--g2);color:#0a1f0a}
+.slide-h{font-family:'Playfair Display',serif;font-size:clamp(18px,4vw,36px);font-weight:900;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.5);line-height:1.15}
+.slide-sub{font-size:13px;color:rgba(255,255,255,.82);margin-top:4px}
+.s-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:20;width:40px;height:40px;border-radius:50%;background:rgba(0,0,0,.38);border:none;color:#fff;font-size:20px;cursor:pointer;transition:background .2s;display:flex;align-items:center;justify-content:center}
+.s-arrow:hover{background:rgba(0,0,0,.6)}
+#sPrev{left:12px}#sNext{right:12px}
+.s-dots{position:absolute;bottom:12px;right:16px;display:flex;gap:6px}
+.s-dot{width:8px;height:8px;border-radius:99px;background:rgba(255,255,255,.4);border:none;cursor:pointer;transition:all .3s}
+.s-dot.active{width:22px;background:var(--g2)}
+
+/* HERO */
+.hero-box{max-width:var(--max);margin:0 auto;padding:14px 16px 0}
+.hero-card{background:var(--glass);backdrop-filter:blur(10px);border:1px solid var(--bdr);border-radius:22px;padding:34px 38px;position:relative;overflow:hidden}
+@media(max-width:600px){.hero-card{padding:22px 18px}}
+.hero-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--g),var(--g2),var(--gold),var(--g2),var(--g))}
+.hero-h1{font-family:'Playfair Display',serif;font-size:clamp(26px,5vw,48px);font-weight:900;line-height:1.08;letter-spacing:-.4px}
+.hero-h1 em{font-style:italic;color:var(--g2)}
+.hero-p{margin-top:12px;color:var(--textm);max-width:560px;font-size:15px;line-height:1.7}
+.hero-btns{margin-top:20px;display:flex;gap:10px;flex-wrap:wrap}
+.btn-wa{padding:11px 20px;border-radius:13px;font-weight:700;font-size:14px;background:linear-gradient(90deg,#25d366,#128c7e);color:#011f0f;display:inline-flex;align-items:center;gap:8px;transition:transform .14s,box-shadow .14s;border:none;cursor:pointer;font-family:'DM Sans',sans-serif}
+.btn-wa:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(37,211,102,.35)}
+
+/* STATS */
+.stats{max-width:var(--max);margin:16px auto;padding:0 16px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:600px){.stats{grid-template-columns:1fr 1fr}}
+.stat{background:var(--glass);border:1px solid var(--bdr);border-radius:14px;padding:16px 12px;text-align:center}
+.stat-ic{font-size:24px;margin-bottom:5px}
+.stat-val{font-size:14px;font-weight:700}
+.stat-lbl{font-size:11px;color:var(--muted);margin-top:2px}
+
+/* MENU */
+.filter-bar{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.f-inp{flex:1;min-width:160px;padding:10px 14px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid var(--bdr);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;outline:none}
+[data-theme="light"] .f-inp{background:#fff}
+.f-inp::placeholder{color:rgba(255,255,255,.22)}
+[data-theme="light"] .f-inp::placeholder{color:rgba(0,0,0,.3)}
+.f-inp:focus,.f-sel:focus{border-color:rgba(116,196,118,.45);box-shadow:0 0 0 3px rgba(116,196,118,.1)}
+.f-sel{padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid var(--bdr);color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;outline:none;cursor:pointer}
+[data-theme="light"] .f-sel{background:#fff}
+.cat-pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.cpill{padding:6px 14px;border-radius:999px;font-size:12px;font-weight:600;border:1px solid var(--bdr);background:rgba(255,255,255,.03);color:var(--muted);cursor:pointer;transition:all .2s}
+.cpill.on,.cpill:hover{background:rgba(116,196,118,.14);border-color:rgba(116,196,118,.35);color:var(--g2)}
+.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}
+.mcard{background:var(--glass);border:1px solid var(--bdr);border-radius:18px;overflow:hidden;transition:transform .32s,box-shadow .32s;cursor:pointer}
+.mcard:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.mc-img{position:relative;overflow:hidden}
+.mc-img img{width:100%;height:196px;object-fit:cover;transition:transform .5s}
+.mcard:hover .mc-img img{transform:scale(1.07)}
+.mc-pop{position:absolute;top:10px;left:10px;background:linear-gradient(90deg,#ffd166,var(--g2));color:#1b2a14;font-size:11px;font-weight:800;padding:4px 10px;border-radius:999px;z-index:2}
+.mc-cat{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.55);color:#fff;font-size:10px;font-weight:700;padding:3px 9px;border-radius:999px;text-transform:uppercase;letter-spacing:.4px}
+.mc-tip{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(0,rgba(0,0,0,.82),transparent);color:#eaf6ea;padding:22px 14px 10px;font-size:11px;opacity:0;transition:opacity .22s;pointer-events:none}
+.mcard:hover .mc-tip{opacity:1}
+.mc-body{padding:14px 16px}
+.mc-name{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;margin-bottom:4px}
+.mc-desc{font-size:12px;color:var(--textm);line-height:1.5;height:34px;overflow:hidden}
+.mc-foot{display:flex;align-items:center;justify-content:space-between;margin-top:12px;gap:8px}
+.mc-price{font-size:18px;font-weight:800;color:var(--g2)}
+.mc-acts{display:flex;gap:7px}
+.btn-add{background:linear-gradient(90deg,var(--g),var(--g2));color:#eef6ef;padding:8px 14px;border-radius:10px;border:none;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:transform .14s}
+.btn-add:hover{transform:scale(1.05)}
+.btn-det{border:1px solid var(--bdr);color:var(--text);background:transparent;padding:8px 11px;border-radius:10px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .18s}
+.btn-det:hover{background:rgba(255,255,255,.06)}
+
+/* PROMOS */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.pcard{background:var(--glass);border:1px solid var(--bdr);border-radius:18px;padding:22px;border-top:3px solid var(--g2);position:relative;overflow:hidden}
+.pcard::before{content:'';position:absolute;top:0;right:0;width:100px;height:100px;background:radial-gradient(circle,rgba(116,196,118,.1),transparent 70%)}
+.pbadge{display:inline-block;padding:4px 12px;border-radius:999px;font-size:11px;font-weight:700;margin-bottom:10px;background:rgba(116,196,118,.15);color:var(--g2)}
+.ptitle{font-family:'Playfair Display',serif;font-size:18px;font-weight:800;margin-bottom:6px}
+.pdesc{font-size:13px;color:var(--textm);line-height:1.5;margin-bottom:14px}
+.pfoot{display:flex;justify-content:space-between;align-items:center}
+.pprice{font-size:20px;font-weight:900;color:var(--gold)}
+
+/* CHEFS */
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px}
+.ccard{background:var(--glass);border:1px solid var(--bdr);border-radius:18px;padding:24px 20px;text-align:center;transition:transform .3s}
+.ccard:hover{transform:translateY(-4px)}
+.chef-av{width:96px;height:96px;border-radius:50%;object-fit:cover;margin:0 auto 12px;border:3px solid var(--g2);box-shadow:0 0 24px rgba(116,196,118,.22)}
+.chef-nm{font-family:'Playfair Display',serif;font-size:17px;font-weight:700}
+.chef-role{font-size:11px;color:var(--g2);font-weight:600;margin:4px 0 8px;text-transform:uppercase;letter-spacing:.4px}
+.chef-bio{font-size:13px;color:var(--textm);line-height:1.6}
+
+/* GALLERY */
+.ggrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media(max-width:500px){.ggrid{grid-template-columns:1fr 1fr}}
+.gitem{position:relative;border-radius:13px;overflow:hidden;cursor:pointer;aspect-ratio:4/3}
+.gitem img{width:100%;height:100%;object-fit:cover;transition:transform .4s,filter .4s}
+.gitem:hover img{transform:scale(1.09);filter:brightness(.78)}
+.gov{position:absolute;inset:0;background:linear-gradient(0,rgba(0,0,0,.55),transparent);display:flex;align-items:flex-end;padding:8px 10px;opacity:0;transition:opacity .25s}
+.gitem:hover .gov{opacity:1}
+.gov span{font-size:12px;font-weight:700;color:#fff}
+
+/* REVIEWS */
+.rvgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:500px){.rvgrid{grid-template-columns:1fr}}
+.rvcard{background:var(--glass);border:1px solid var(--bdr);border-radius:14px;padding:14px 16px}
+.rv-stars{color:#ffd166;font-size:12px;margin-bottom:4px}
+.rv-text{font-size:13px;color:var(--textm);line-height:1.6;font-style:italic}
+.rv-name{font-size:11px;font-weight:700;color:var(--g2);margin-top:8px}
+.rv-form-box{background:var(--glass);border:1px solid var(--bdr);border-radius:16px;padding:18px;margin-top:14px}
+.rv-form-box h4{font-weight:700;margin-bottom:10px;font-size:14px}
+.stars-pick{display:flex;gap:6px;margin-bottom:10px}
+.star{font-size:20px;cursor:pointer;transition:transform .15s;opacity:.3}
+.star.sel{opacity:1}
+.star:hover{transform:scale(1.2)}
+.rv-inp{width:100%;padding:10px 13px;border-radius:11px;background:rgba(255,255,255,.04);border:1px solid var(--bdr);color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;outline:none;margin-bottom:8px}
+[data-theme="light"] .rv-inp{background:#fff}
+.rv-inp:focus{border-color:rgba(116,196,118,.4)}
+textarea.rv-inp{resize:vertical;min-height:68px}
+
+/* TIMELINE */
+.tl{position:relative;padding-left:26px}
+.tl::before{content:'';position:absolute;left:7px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--g),var(--g2),transparent)}
+.tl-item{position:relative;margin-bottom:16px;padding:12px 14px;background:var(--glass);border:1px solid var(--bdr);border-radius:12px}
+.tl-item::before{content:'';position:absolute;left:-21px;top:15px;width:10px;height:10px;border-radius:50%;background:var(--g2);box-shadow:0 0 10px rgba(116,196,118,.5)}
+.tl-year{font-size:11px;font-weight:700;color:var(--g2);text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px}
+.tl-txt{font-size:13px;color:var(--textm);line-height:1.5}
+
+/* FAQ */
+.faq-item{background:var(--glass);border:1px solid var(--bdr);border-radius:13px;overflow:hidden;margin-bottom:8px}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;cursor:pointer;font-weight:600;font-size:13px;gap:12px}
+.faq-arr{transition:transform .3s;font-size:17px;color:var(--g2);flex-shrink:0}
+.faq-item.open .faq-arr{transform:rotate(180deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease;font-size:13px;color:var(--textm);line-height:1.6}
+.faq-item.open .faq-a{max-height:200px;padding:0 18px 13px}
+
+/* RESERVA */
+.rform{background:var(--glass);border:1px solid var(--bdr);border-radius:20px;padding:30px 34px}
+@media(max-width:600px){.rform{padding:18px 16px}}
+.r-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+@media(max-width:600px){.r-grid{grid-template-columns:1fr}}
+.r-inp{width:100%;padding:11px 14px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid var(--bdr);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;outline:none}
+[data-theme="light"] .r-inp{background:#fff}
+.r-inp:focus{border-color:rgba(116,196,118,.45);box-shadow:0 0 0 3px rgba(116,196,118,.08)}
+select.r-inp{cursor:pointer}
+.r-lbl{font-size:11px;font-weight:600;color:var(--muted);display:block;margin-bottom:5px;text-transform:uppercase;letter-spacing:.4px}
+
+/* CONTACTO */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:640px){.contact-grid{grid-template-columns:1fr}}
+.contact-card{background:var(--glass);border:1px solid var(--bdr);border-radius:18px;padding:22px}
+.contact-card p{font-size:13px;color:var(--textm);margin-bottom:6px;line-height:1.5}
+.contact-card strong{color:var(--text)}
+.contact-card a{color:var(--g2)}
+.soc-bar{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.soc-chip{padding:7px 14px;border-radius:999px;border:1px solid var(--bdr);background:rgba(255,255,255,.03);font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;transition:all .2s;text-decoration:none}
+.soc-chip:hover{border-color:var(--g2);color:var(--g2);background:rgba(116,196,118,.08)}
+.map-frame{border-radius:18px;overflow:hidden;border:1px solid var(--bdr)}
+
+/* CART DRAWER */
+#cartOverlay{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:90;display:none}
+#cartOverlay.show{display:block}
+#cartDrawer{position:fixed;top:0;right:0;width:100%;max-width:400px;height:100vh;z-index:95;transform:translateX(100%);transition:transform .45s cubic-bezier(.22,.9,.2,1);display:flex;flex-direction:column;background:linear-gradient(180deg,rgba(18,12,4,.97),rgba(8,5,2,.99));border-left:3px solid var(--g2)}
+#cartDrawer.open{transform:translateX(0)}
+.cart-hd{display:flex;justify-content:space-between;align-items:center;padding:20px 22px;border-bottom:1px solid rgba(255,255,255,.08)}
+.cart-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700}
+.cart-x{background:none;border:none;color:var(--text);font-size:22px;cursor:pointer;line-height:1;transition:color .2s}
+.cart-x:hover{color:var(--g2)}
+#cartItems{flex:1;overflow-y:auto;padding:16px 18px}
+#cartItems::-webkit-scrollbar{width:5px}
+#cartItems::-webkit-scrollbar-thumb{background:var(--g2);border-radius:5px}
+.cart-ft{padding:16px 22px;border-top:1px solid rgba(255,255,255,.08)}
+.cart-total-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.cart-total-lbl{font-size:14px;color:var(--muted)}
+#cartTotal{font-size:26px;font-weight:900;color:var(--g2)}
+#floatCart{position:fixed;bottom:80px;right:18px;z-index:89;width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,var(--g2),var(--g));border:none;cursor:pointer;font-size:24px;box-shadow:0 8px 28px rgba(31,111,58,.5);transition:transform .2s;display:flex;align-items:center;justify-content:center}
+@media(min-width:769px){#floatCart{bottom:24px;right:22px}}
+#floatCart:hover{transform:scale(1.1)}
+.cart-bubble{position:absolute;top:2px;right:2px;background:#e53e3e;color:#fff;font-size:10px;font-weight:700;min-width:18px;height:18px;border-radius:99px;display:flex;align-items:center;justify-content:center;padding:0 4px}
+
+/* MODAL */
+#modalBg{position:fixed;inset:0;background:rgba(2,6,3,.86);z-index:95;display:none;align-items:center;justify-content:center;padding:16px}
+#modalBg.show{display:flex}
+.modal-box{background:rgba(10,20,12,.98);border:1px solid var(--bdr);border-radius:22px;max-width:760px;width:100%;max-height:90vh;overflow-y:auto;position:relative}
+.modal-box::-webkit-scrollbar{width:5px}
+.modal-box::-webkit-scrollbar-thumb{background:var(--g2);border-radius:5px}
+.modal-x{position:absolute;top:12px;right:12px;background:rgba(255,255,255,.08);border:none;color:var(--text);width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:15px;z-index:2;transition:background .2s}
+.modal-x:hover{background:rgba(255,255,255,.16)}
+.modal-inner{display:grid;grid-template-columns:1fr 1fr}
+@media(max-width:540px){.modal-inner{grid-template-columns:1fr}}
+.modal-img{border-radius:22px 0 0 22px;overflow:hidden}
+@media(max-width:540px){.modal-img{border-radius:22px 22px 0 0}}
+.modal-img img{width:100%;height:100%;min-height:260px;object-fit:cover}
+.modal-info{padding:24px}
+.modal-name{font-family:'Playfair Display',serif;font-size:20px;font-weight:800;margin-bottom:5px}
+.modal-price{font-size:20px;font-weight:900;color:var(--g2);margin-bottom:10px}
+.modal-desc{font-size:13px;color:var(--textm);line-height:1.65;margin-bottom:12px}
+.modal-meta{font-size:12px;color:var(--textm);margin-bottom:4px}
+.modal-meta strong{color:var(--text)}
+.modal-qty{display:flex;align-items:center;gap:10px;padding:0 24px 22px}
+.qty-btn{width:30px;height:30px;border-radius:50%;border:1px solid rgba(116,196,118,.3);background:rgba(116,196,118,.1);color:var(--g2);font-size:16px;cursor:pointer;font-weight:700;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.qty-btn:hover{background:rgba(116,196,118,.25)}
+#mQty{width:40px;text-align:center;font-size:15px;font-weight:700;background:none;border:none;color:var(--text)}
+
+/* MOBILE NAV */
+.mobnav{position:fixed;bottom:0;left:0;right:0;background:rgba(6,16,10,.93);backdrop-filter:blur(14px);border-top:1px solid var(--bdr);display:none;justify-content:space-around;padding:7px 0;z-index:70}
+@media(max-width:768px){.mobnav{display:flex}}
+[data-theme="light"] .mobnav{background:rgba(245,250,245,.96)}
+.mobnav a{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:10px;color:var(--muted);padding:4px 8px;border-radius:10px;transition:color .2s}
+.mobnav a:hover{color:var(--g2)}
+.mobnav a .mn-ic{font-size:19px}
+
+/* NEWSLETTER */
+.nl-form{display:flex;gap:8px;margin-top:12px}
+.nl-inp{flex:1;padding:10px 13px;border-radius:11px;background:rgba(255,255,255,.04);border:1px solid var(--bdr);color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;outline:none}
+[data-theme="light"] .nl-inp{background:#fff}
+.nl-inp:focus{border-color:rgba(116,196,118,.4)}
+
+/* FOOTER */
+footer{max-width:var(--max);margin:48px auto 0;padding:26px 20px 80px;border-top:1px solid var(--bdr)}
+@media(min-width:769px){footer{padding-bottom:26px}}
+.foot-inner{display:flex;flex-direction:column;gap:8px;align-items:center;text-align:center}
+.foot-brand{font-family:'Playfair Display',serif;font-size:17px;font-weight:700}
+.foot-sub{font-size:12px;color:var(--muted)}
+.foot-soc{display:flex;gap:8px;margin-top:6px;flex-wrap:wrap;justify-content:center}
+.foot-soc a{font-size:12px;color:var(--muted);padding:5px 11px;border-radius:999px;border:1px solid var(--bdr);transition:all .2s}
+.foot-soc a:hover{color:var(--g2);border-color:var(--g2)}
+</style>
+</head>
+<body>
+
+<script src="js/data.js"></script>
+<script>const SESSION = checkSession();</script>
+
+<!-- PRELOADER -->
+<div id="preloader">
+  <img src="LOGO PAILA.png" alt="Logo">
+  <div class="bar"><div class="bar-fill"></div></div>
+  <p>Cargando La Paila de Mi Abuela…</p>
+</div>
+
+<!-- CART -->
+<div id="cartOverlay" onclick="closeCart()"></div>
+<aside id="cartDrawer">
+  <div class="cart-hd"><div class="cart-title">Tu Pedido 🍃</div><button class="cart-x" onclick="closeCart()">✕</button></div>
+  <div id="cartItems"></div>
+  <div class="cart-ft">
+    <div class="cart-total-row"><span class="cart-total-lbl">Total del pedido</span><span id="cartTotal">$0</span></div>
+    <button class="btn-g" style="width:100%;padding:13px;font-size:15px;justify-content:center" onclick="checkout()">💬 Enviar por WhatsApp</button>
+  </div>
+</aside>
+<button id="floatCart" onclick="openCart()" aria-label="Abrir carrito">🧺<span class="cart-bubble cart-count">0</span></button>
+
+<!-- MODAL -->
+<div id="modalBg" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box">
+    <button class="modal-x" onclick="closeModal()">✕</button>
+    <div class="modal-inner" id="modalInner"></div>
+    <div class="modal-qty">
+      <button class="qty-btn" onclick="changeQty(-1)">−</button>
+      <input id="mQty" type="number" min="1" value="1">
+      <button class="qty-btn" onclick="changeQty(1)">+</button>
+      <button id="mAddBtn" class="btn-g" style="flex:1;padding:11px;justify-content:center">Agregar al pedido</button>
+    </div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-in">
+    <a class="nav-logo" href="index.html">
+      <img src="LOGO PAILA.png" alt="Logo La Paila">
+      <div><div class="nav-brand">La Paila de Mi Abuela</div><div class="nav-tag">Sabor tradicional · Quibdó</div></div>
+    </a>
+    <div class="nav-links">
+      <a class="nav-link" href="#menu">Menú</a>
+      <a class="nav-link" href="#promos">Promos</a>
+      <a class="nav-link" href="#nosotros">Nosotros</a>
+      <a class="nav-link" href="#chefs">Chefs</a>
+      <a class="nav-link" href="#galeria">Galería</a>
+      <a class="nav-link" href="#reserva">Reservas</a>
+      <a class="nav-link" href="#contacto">Contacto</a>
+    </div>
+    <div class="nav-right">
+      <div class="user-pill" id="userPill">👤 Cliente</div>
+      <button id="themeBtn" class="btn-o" style="font-size:12px;padding:7px 12px">🌙 Oscuro</button>
+      <button class="btn-g" style="padding:8px 14px;font-size:13px" onclick="openCart()">🧺 <span class="cart-count">0</span></button>
+      <button class="btn-o" style="font-size:12px;padding:7px 12px;color:#f87171;border-color:rgba(248,113,113,.3)" onclick="logout()">Salir</button>
+    </div>
+    <button class="ham" id="ham" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mob-menu" id="mobMenu">
+  <a href="#menu" onclick="closeMenu()">🍽️ Menú</a>
+  <a href="#promos" onclick="closeMenu()">🔥 Promociones</a>
+  <a href="#nosotros" onclick="closeMenu()">📖 Nosotros</a>
+  <a href="#chefs" onclick="closeMenu()">👨‍🍳 Chefs</a>
+  <a href="#galeria" onclick="closeMenu()">📸 Galería</a>
+  <a href="#reserva" onclick="closeMenu()">📅 Reservas</a>
+  <a href="#contacto" onclick="closeMenu()">📍 Contacto</a>
+  <a href="admin.html" style="color:var(--gold)">⚙️ Panel Admin</a>
+  <a href="#" onclick="logout()" style="color:#f87171">🚪 Cerrar sesión</a>
+</div>
+
+<!-- HERO SLIDER -->
+<div class="slider-wrap">
+  <div class="slider-outer">
+    <button class="s-arrow" id="sPrev">‹</button>
+    <button class="s-arrow" id="sNext">›</button>
+    <div class="s-track" id="sTrack">
+      <div class="slide"><img src="Promocion.jpg" alt="Promo" loading="eager"><div class="slide-ov"></div><div class="slide-cnt"><span class="slide-badge">🔥 PROMO DESTACADA</span><h2 class="slide-h">Combo Familiar Pacífico</h2><p class="slide-sub">Encocado + Sancocho + 4 bebidas · Solo $85.000</p></div></div>
+      <div class="slide"><img src="LUNES.jpg" alt="Lunes" loading="lazy"><div class="slide-ov"></div><div class="slide-cnt"><span class="slide-badge" style="background:var(--gold);color:#1a0f00">📅 LUNES DE ANTOJO</span><h2 class="slide-h">2x1 en Empanadas Chocuanas</h2><p class="slide-sub">Todos los lunes de 3 PM a 5 PM</p></div></div>
+      <div class="slide"><img src="Encocao de camaron.png" alt="Encocado" loading="lazy"><div class="slide-ov"></div><div class="slide-cnt"><span class="slide-badge" style="background:var(--g);color:#eef6ef">⭐ MÁS PEDIDO</span><h2 class="slide-h">Encocado de Camarón</h2><p class="slide-sub">Cremoso, especiado y 100% del Pacífico · $31.000</p></div></div>
+    </div>
+    <div class="s-dots" id="sDots"></div>
+  </div>
+</div>
+
+<!-- HERO TEXT -->
+<div class="hero-box reveal">
+  <div class="hero-card" data-aos="fade-up">
+    <h1 class="hero-h1">Comida que <em>abraza</em> el alma</h1>
+    <p class="hero-p">Recetas de la abuela, ingredientes cosechados cerca del río y técnicas tradicionales del Pacífico chocoano. Un plato que combina la selva y la costa en perfecta armonía.</p>
+    <div class="hero-btns">
+      <a href="#menu" class="btn-g">Ver menú completo</a>
+      <a href="#reserva" class="btn-o">Reservar mesa</a>
+      <a href="https://api.whatsapp.com/send?phone=573106684360" target="_blank" class="btn-wa">💬 WhatsApp</a>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats reveal">
+  <div class="stat" data-aos="fade-up"><div class="stat-ic">⚡</div><div class="stat-val">30–50 min</div><div class="stat-lbl">Entrega garantizada</div></div>
+  <div class="stat" data-aos="fade-up" data-aos-delay="60"><div class="stat-ic">🌿</div><div class="stat-val">100% Local</div><div class="stat-lbl">Ingredientes Chocoanos</div></div>
+  <div class="stat" data-aos="fade-up" data-aos-delay="120"><div class="stat-ic">💳</div><div class="stat-val">Pago seguro</div><div class="stat-lbl">Todos los métodos</div></div>
+  <div class="stat" data-aos="fade-up" data-aos-delay="180"><div class="stat-ic">⭐</div><div class="stat-val">4.8 / 5</div><div class="stat-lbl">Calificación clientes</div></div>
+</div>
+
+<!-- MENÚ -->
+<div class="sep"></div>
+<section id="menu" class="section reveal">
+  <div class="sec-hd"><h2 class="sec-title">Menú de <span>la Abuela</span> 🥘</h2><a href="#reserva" class="btn-o" style="font-size:12px;padding:7px 14px">Reservar mesa</a></div>
+  <div class="filter-bar">
+    <input class="f-inp" id="searchInput" placeholder="Buscar plato o ingrediente…" oninput="debouncedFilter()">
+    <select class="f-sel" id="sortSelect" onchange="filterMenu()">
+      <option value="">Ordenar…</option>
+      <option value="asc">Precio: menor a mayor</option>
+      <option value="desc">Precio: mayor a menor</option>
+      <option value="pop">Más pedidos primero</option>
+    </select>
+  </div>
+  <div class="cat-pills" id="catPills">
+    <button class="cpill on" data-cat="">Todos</button>
+    <button class="cpill" data-cat="principal">🍛 Principales</button>
+    <button class="cpill" data-cat="sopa">🍲 Sopas</button>
+    <button class="cpill" data-cat="mar">🦐 Mariscos</button>
+    <button class="cpill" data-cat="entrada">🥟 Entradas</button>
+    <button class="cpill" data-cat="postre">🍌 Postres</button>
+  </div>
+  <div class="mgrid" id="menuGrid"></div>
+</section>
+
+<!-- PROMOS -->
+<div class="sep"></div>
+<section id="promos" class="section reveal">
+  <div class="sec-hd"><h2 class="sec-title">Promociones <span>Especiales</span> ✨</h2></div>
+  <div class="pgrid">
+    <div class="pcard" data-aos="fade-up"><div class="pbadge">🎉 HOY DISPONIBLE</div><div class="ptitle">Combo Familiar Pacífico</div><p class="pdesc">Encocado + 4 Tamales del Chocó + 1 Sancocho + 4 bebidas a elección.</p><div class="pfoot"><div class="pprice">$85.000</div><a href="https://api.whatsapp.com/send?phone=573106684360" target="_blank" class="btn-g" style="font-size:12px;padding:8px 14px">Pedir</a></div></div>
+    <div class="pcard" data-aos="fade-up" data-aos-delay="80"><div class="pbadge" style="background:rgba(201,152,58,.15);color:var(--gold)">🕒 LUN–VIE · 3–5PM</div><div class="ptitle">Hora Feliz en Entradas</div><p class="pdesc">2x1 en Empanadas de Camarón y Bolitas de Yuca. De lunes a viernes.</p><div class="pfoot"><div class="pprice">¡2x1!</div><a href="#menu" class="btn-o" style="font-size:12px;padding:8px 14px">Ver entradas</a></div></div>
+    <div class="pcard" data-aos="fade-up" data-aos-delay="160"><div class="pbadge">🎁 DELIVERY +$50K</div><div class="ptitle">Postre de la Casa Gratis</div><p class="pdesc">Postre de Leche y Panela GRATIS en pedidos a domicilio superiores a $50.000.</p><div class="pfoot"><div class="pprice">¡Gratis!</div><a href="https://api.whatsapp.com/send?phone=573106684360" target="_blank" class="btn-g" style="font-size:12px;padding:8px 14px">Pedir</a></div></div>
+  </div>
+</section>
+
+<!-- NOSOTROS -->
+<div class="sep"></div>
+<section id="nosotros" class="section reveal">
+  <div class="sec-hd"><h2 class="sec-title">Nuestra <span>Historia</span> 📖</h2></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:start">
+    <div>
+      <p style="font-size:14px;color:var(--textm);line-height:1.75;margin-bottom:18px">La Paila de Mi Abuela nació de las manos de Doña Matilde, quien desde pequeña aprendió las recetas ancestrales del Pacífico colombiano. Lo que empezó como un fogón familiar se convirtió en el restaurante más querido de Quibdó.</p>
+      <p style="font-size:14px;color:var(--textm);line-height:1.75;margin-bottom:22px">Hoy, con más de 14 años preservando la gastronomía chocoana, somos una necesidad cultural de la región que atiende con dedicación y orgullo.</p>
+      <div class="tl">
+        <div class="tl-item"><div class="tl-year">2010</div><div class="tl-txt">Receta familiar nace en la cocina de Doña Matilde, Quibdó.</div></div>
+        <div class="tl-item"><div class="tl-year">2015</div><div class="tl-txt">Participamos en ferias gastronómicas del Chocó y ganamos reconocimiento regional.</div></div>
+        <div class="tl-item"><div class="tl-year">2019</div><div class="tl-txt">Apertura del primer local en Cra 7 # 45-10, Quibdó.</div></div>
+        <div class="tl-item"><div class="tl-year">2022</div><div class="tl-txt">Incorporamos servicio de domicilios y menú ampliado con Mariscos Premium.</div></div>
+        <div class="tl-item" style="margin-bottom:0"><div class="tl-year">2024</div><div class="tl-txt">Digitalizamos el servicio con plataforma web y sistema de reservas online.</div></div>
+      </div>
+    </div>
+    <div>
+      <div style="background:var(--glass);border:1px solid var(--bdr);border-radius:18px;overflow:hidden">
+        <img src="Sancocho de gallina.jpg" alt="Cocina" style="width:100%;height:200px;object-fit:cover">
+        <div style="padding:18px">
+          <h3 style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;margin-bottom:8px">Supliendo una necesidad regional</h3>
+          <p style="font-size:13px;color:var(--textm);line-height:1.6">El Chocó tiene una riqueza gastronómica única en Colombia. La Paila preserva y dignifica esa herencia, generando empleo local y ofreciendo comida auténtica, de calidad y a precios justos.</p>
+        </div>
+      </div>
+      <!-- REDES SOCIALES -->
+      <div style="background:var(--glass);border:1px solid var(--bdr);border-radius:16px;padding:18px;margin-top:14px">
+        <h4 style="font-weight:700;font-size:14px;margin-bottom:10px">📲 Comparte en redes sociales</h4>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://lapailademiabuela.com" target="_blank" class="soc-chip">📘 Facebook</a>
+          <a href="https://twitter.com/intent/tweet?text=¡La Paila de Mi Abuela en Quibdó! 🍲&url=https://lapailademiabuela.com" target="_blank" class="soc-chip">🐦 Twitter</a>
+          <a href="https://api.whatsapp.com/send?text=🍲 ¡Prueba La Paila de Mi Abuela! https://lapailademiabuela.com" target="_blank" class="soc-chip">💬 WhatsApp</a>
+          <a href="https://instagram.com" target="_blank" class="soc-chip">📸 Instagram</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHEFS -->
+<div class="sep"></div>
+<section id="chefs" class="section reveal">
+  <div class="sec-hd"><h2 class="sec-title">Nuestros <span>Chefs</span> 👨‍🍳</h2></div>
+  <div class="cgrid">
+    <div class="ccard" data-aos="fade-up"><img class="chef-av" src="CHEF.jpg" alt="Doña Matilde" loading="lazy"><div class="chef-nm">Doña Matilde</div><div class="chef-role">Fundadora · Jefa de Cocina</div><p class="chef-bio">La guardiana de las recetas originales. Su sazón es el alma de La Paila. Más de 30 años de experiencia culinaria.</p></div>
+    <div class="ccard" data-aos="fade-up" data-aos-delay="80"><img class="chef-av" src="Julian.jpg" alt="Chef Julián" loading="lazy"><div class="chef-nm">Chef Julián</div><div class="chef-role">Innovación · Platos de Mar</div><p class="chef-bio">Aporta técnicas modernas manteniendo la esencia chocoana. Experto en Encocados y preparaciones con coco.</p></div>
+    <div class="ccard" data-aos="fade-up" data-aos-delay="160"><img class="chef-av" src="Sofia.jpg" alt="Sofía" loading="lazy"><div class="chef-nm">Asistente Sofía</div><div class="chef-role">Postres · Preparaciones Frescas</div><p class="chef-bio">Encargada de la selección de frutas frescas y la elaboración artesanal de todos nuestros postres.</p></div>
+  </div>
+</section>
+
+<!-- GALERÍA + RESEÑAS + FAQ -->
+<div class="sep"></div>
+<div style="max-width:var(--max);margin:50px auto;padding:0 16px;display:grid;grid-template-columns:2fr 1fr;gap:26px" class="reveal">
+  <div>
+    <section id="galeria">
+      <h2 class="sec-title" style="margin-bottom:16px">Galería de <span>Sabores</span> 📸</h2>
+      <div class="ggrid" id="galleryGrid"></div>
+    </section>
+    <section style="margin-top:36px">
+      <h2 class="sec-title" style="margin-bottom:16px">Lo que dicen <span>nuestros clientes</span> 💬</h2>
+      <div class="rvgrid" id="reviewsGrid"></div>
+      <div class="rv-form-box">
+        <h4>Deja tu reseña</h4>
+        <div class="stars-pick" id="starPick">
+          <span class="star sel" data-s="1">⭐</span><span class="star sel" data-s="2">⭐</span><span class="star sel" data-s="3">⭐</span><span class="star sel" data-s="4">⭐</span><span class="star sel" data-s="5">⭐</span>
+        </div>
+        <form id="rvForm" onsubmit="submitReview(event)">
+          <input class="rv-inp" id="rvName" placeholder="Tu nombre (ej: María C.)" required>
+          <textarea class="rv-inp" id="rvText" placeholder="Cuéntanos tu experiencia…" required></textarea>
+          <div style="display:flex;gap:8px">
+            <button type="submit" class="btn-g" style="padding:9px 18px">Enviar reseña</button>
+            <button type="button" class="btn-o" style="font-size:12px;padding:9px 12px" onclick="clearReviews()">Limpiar demo</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </div>
+  <div>
+    <h3 style="font-family:'Playfair Display',serif;font-size:19px;font-weight:700;margin-bottom:14px">Preguntas Frecuentes ❓</h3>
+    <div id="faqList">
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">¿Hacen domicilios fuera de Quibdó?<span class="faq-arr">⌄</span></div><div class="faq-a">Actualmente cubrimos la zona urbana de Quibdó. Estamos trabajando para expandirnos pronto.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">¿Cómo hago una reservación?<span class="faq-arr">⌄</span></div><div class="faq-a">Usa el formulario de Reservas o envíanos un mensaje de WhatsApp con los detalles.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">¿Qué métodos de pago aceptan?<span class="faq-arr">⌄</span></div><div class="faq-a">Aceptamos efectivo, Nequi, Daviplata y transferencias bancarias.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">¿Los ingredientes son locales?<span class="faq-arr">⌄</span></div><div class="faq-a">Sí. Trabajamos con proveedores locales del Chocó, apoyando la economía regional.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">¿Tienen opciones vegetarianas?<span class="faq-arr">⌄</span></div><div class="faq-a">Contamos con arroz con coco, plátano con queso y sopas adaptables. Consúltanos.</div></div>
+    </div>
+    <div style="background:var(--glass);border:1px solid var(--bdr);border-radius:14px;padding:18px;margin-top:18px">
+      <h4 style="font-weight:700;margin-bottom:8px;font-size:14px">📬 Recibe novedades</h4>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:10px">Suscríbete y recibe recetas, promos y noticias del restaurante.</p>
+      <form id="nlForm" onsubmit="subNews(event)">
+        <input class="rv-inp" id="nlEmail" type="email" placeholder="tu@correo.com" required style="margin-bottom:8px">
+        <button type="submit" class="btn-g" style="width:100%;padding:9px;justify-content:center">Suscribirme</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- RESERVA -->
+<div class="sep"></div>
+<section id="reserva" class="section reveal">
+  <div class="sec-hd"><h2 class="sec-title">Reserva tu <span>Mesa</span> 🍽️</h2></div>
+  <div class="rform">
+    <form id="reservaForm" onsubmit="submitReserva(event)">
+      <div class="r-grid">
+        <div><label class="r-lbl">Nombre completo</label><input class="r-inp" id="rName" placeholder="Tu nombre" required></div>
+        <div><label class="r-lbl">Teléfono / WhatsApp</label><input class="r-inp" id="rTel" type="tel" placeholder="Ej: 3101234567" required></div>
+        <div><label class="r-lbl">Fecha</label><input class="r-inp" id="rDate" type="date" required></div>
+        <div><label class="r-lbl">Hora</label><input class="r-inp" id="rTime" type="time" required></div>
+        <div><label class="r-lbl">Número de personas</label><select class="r-inp" id="rPeople"><option>1 Persona</option><option>2 Personas</option><option selected>3 Personas</option><option>4 Personas</option><option>5 Personas</option><option>6 Personas</option><option>Más de 6</option></select></div>
+        <div><label class="r-lbl">Ocasión especial</label><select class="r-inp" id="rOcasion"><option value="">— Sin especificar —</option><option>Cumpleaños</option><option>Aniversario</option><option>Reunión de negocios</option><option>Celebración familiar</option></select></div>
+        <div style="grid-column:1/-1"><label class="r-lbl">Comentarios</label><textarea class="r-inp" id="rNotes" placeholder="Solicitudes especiales…" rows="3" style="resize:vertical"></textarea></div>
+        <div style="grid-column:1/-1"><button type="submit" class="btn-g" style="width:100%;padding:14px;font-size:15px;justify-content:center">💬 Confirmar por WhatsApp</button></div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<div class="sep"></div>
+<section id="contacto" class="section reveal">
+  <div class="sec-hd"><h2 class="sec-title">Contacto & <span>Ubicación</span> 📍</h2></div>
+  <div class="contact-grid">
+    <div class="contact-card">
+      <h3 style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;margin-bottom:12px">Información</h3>
+      <p><strong>Dirección:</strong> Cra 7 # 45-10, Quibdó, Chocó</p>
+      <p><strong>Horario:</strong> Lun–Dom · 11:00 am – 10:00 pm</p>
+      <p><strong>Teléfono:</strong> <a href="tel:+573106684360">+57 310 668 4360</a></p>
+      <p><strong>Email:</strong> <a href="mailto:contacto@lapailademiabuela.com">contacto@lapailademiabuela.com</a></p>
+      <p><strong>WhatsApp:</strong> <a href="https://api.whatsapp.com/send?phone=573106684360" target="_blank">Escríbenos aquí</a></p>
+      <div class="soc-bar">
+        <a class="soc-chip" href="https://instagram.com" target="_blank">📸 Instagram</a>
+        <a class="soc-chip" href="https://facebook.com" target="_blank">📘 Facebook</a>
+        <a class="soc-chip" href="https://tiktok.com" target="_blank">🎵 TikTok</a>
+        <a class="soc-chip" href="https://api.whatsapp.com/send?phone=573106684360" target="_blank">💬 WhatsApp</a>
+      </div>
+    </div>
+    <div class="map-frame"><iframe title="Ubicación Quibdó" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15876.60250628373!2d-76.66699478332158!3d5.694857850027771!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e42f9d8542c3f59%3A0x6335191244f77c44!2sQuibd%C3%B3%2C%20Choc%C3%B3!5e0!3m2!1ses!2sco!4v1700000000000!5m2!1ses!2sco" width="100%" height="100%" style="border:0;display:block;min-height:300px" allowfullscreen loading="lazy"></iframe></div>
+  </div>
+</section>
+
+<footer><div class="foot-inner"><div class="foot-brand">🍲 La Paila de Mi Abuela</div><div class="foot-sub">© 2025 · Todos los derechos reservados · Sabor del Pacífico Colombiano</div><div class="foot-sub">Diseñado y desarrollado por <strong>David Hinestroza</strong> · Ingeniería de Sistemas</div><div class="foot-soc"><a href="https://instagram.com" target="_blank">Instagram</a><a href="https://facebook.com" target="_blank">Facebook</a><a href="https://tiktok.com" target="_blank">TikTok</a><a href="https://api.whatsapp.com/send?phone=573106684360" target="_blank">WhatsApp</a></div></div></footer>
+
+<nav class="mobnav"><a href="#menu"><span class="mn-ic">🍽️</span>Menú</a><a href="#promos"><span class="mn-ic">🔥</span>Promos</a><a href="#reserva"><span class="mn-ic">📅</span>Reservar</a><a href="#contacto"><span class="mn-ic">📍</span>Contacto</a></nav>
+<button id="backTop" aria-label="Subir">↑</button>
+<div class="toast" id="toast"></div>
+
+<script src="js/api.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/cart.js"></script>
+<script>
+document.getElementById('userPill').textContent = '👤 ' + (SESSION?.name || 'Cliente');
+
+// SLIDER
+const sTrack=document.getElementById('sTrack');
+const slides=[...document.querySelectorAll('.slide')];
+const dotsEl=document.getElementById('sDots');
+let cur=0,timer;
+slides.forEach((_,i)=>{const d=document.createElement('button');d.className='s-dot'+(i===0?' active':'');d.onclick=()=>goSlide(i);dotsEl.appendChild(d);});
+function goSlide(n){cur=(n+slides.length)%slides.length;sTrack.style.transform=`translateX(-${cur*100}%)`;document.querySelectorAll('.s-dot').forEach((d,i)=>d.classList.toggle('active',i===cur));}
+function autoSlide(){clearInterval(timer);timer=setInterval(()=>goSlide(cur+1),5000);}
+document.getElementById('sPrev').onclick=()=>{goSlide(cur-1);autoSlide();}
+document.getElementById('sNext').onclick=()=>{goSlide(cur+1);autoSlide();}
+autoSlide();
+
+// HAMBURGER
+function toggleMenu(){document.getElementById('ham').classList.toggle('open');document.getElementById('mobMenu').classList.toggle('open');}
+function closeMenu(){document.getElementById('ham').classList.remove('open');document.getElementById('mobMenu').classList.remove('open');}
+
+// MENU
+let activeCat='', debTimer=null;
+function debouncedFilter(){clearTimeout(debTimer);debTimer=setTimeout(filterMenu,160);}
+document.getElementById('catPills').addEventListener('click',e=>{
+  const p=e.target.closest('.cpill');if(!p)return;
+  document.querySelectorAll('.cpill').forEach(x=>x.classList.remove('on'));
+  p.classList.add('on');activeCat=p.dataset.cat;filterMenu();
+});
+function filterMenu(){
+  const q=document.getElementById('searchInput').value.trim().toLowerCase();
+  const sort=document.getElementById('sortSelect').value;
+  let res=PLATOS.filter(p=>(!activeCat||p.cat===activeCat)&&(p.nombre.toLowerCase().includes(q)||p.desc.toLowerCase().includes(q)||p.ingred.join(' ').toLowerCase().includes(q)));
+  if(sort==='asc')res.sort((a,b)=>a.precio-b.precio);
+  else if(sort==='desc')res.sort((a,b)=>b.precio-a.precio);
+  else if(sort==='pop')res.sort((a,b)=>(b.popular?1:0)-(a.popular?1:0));
+  renderMenu(res);
+}
+const CATS={principal:'Principal',sopa:'Sopa',mar:'Mariscos',entrada:'Entrada',postre:'Postre'};
+function renderMenu(list){
+  const grid=document.getElementById('menuGrid');
+  if(!list.length){grid.innerHTML='<p style="color:var(--muted);padding:20px 0">No encontramos platos con esos filtros.</p>';return;}
+  grid.innerHTML=list.map(p=>`
+    <article class="mcard reveal" onclick="openModal(${p.id})">
+      <div class="mc-img">
+        ${p.popular?'<div class="mc-pop">⭐ Más pedido</div>':''}
+        <div class="mc-cat">${CATS[p.cat]||p.cat}</div>
+        <img src="${p.img}" alt="${p.nombre}" loading="lazy">
+        <div class="mc-tip">${p.desc.slice(0,75)}…</div>
+      </div>
+      <div class="mc-body">
+        <div class="mc-name">${p.nombre}</div>
+        <div class="mc-desc">${p.desc}</div>
+        <div class="mc-foot">
+          <div class="mc-price">$${p.precio.toLocaleString('es-CO')}</div>
+          <div class="mc-acts">
+            <button class="btn-add" onclick="event.stopPropagation();addToCart(${p.id})">+ Añadir</button>
+            <button class="btn-det" onclick="event.stopPropagation();openModal(${p.id})">Ver</button>
+          </div>
+        </div>
+      </div>
+    </article>`).join('');
+  initReveal();
+}
+
+// MODAL
+let mId=null;
+function openModal(id){
+  const p=PLATOS.find(x=>x.id===id);if(!p)return;mId=id;
+  document.getElementById('mQty').value=1;
+  document.getElementById('modalInner').innerHTML=`
+    <div class="modal-img"><img src="${p.img}" alt="${p.nombre}"></div>
+    <div class="modal-info">
+      <div class="modal-name">${p.nombre}</div>
+      <div class="modal-price">$${p.precio.toLocaleString('es-CO')}</div>
+      <p class="modal-desc">${p.desc}</p>
+      <p class="modal-meta"><strong>Ingredientes:</strong> ${p.ingred.join(', ')}</p>
+      <p class="modal-meta"><strong>Peso:</strong> ${p.peso} &nbsp;·&nbsp; <strong>Calorías:</strong> ${p.cal} kcal</p>
+    </div>`;
+  document.getElementById('mAddBtn').onclick=()=>{addToCart(mId,+document.getElementById('mQty').value);closeModal();};
+  document.getElementById('modalBg').classList.add('show');document.body.style.overflow='hidden';
+}
+function closeModal(){document.getElementById('modalBg').classList.remove('show');document.body.style.overflow='';}
+function changeQty(d){const i=document.getElementById('mQty');i.value=Math.max(1,+i.value+d);}
+
+// GALLERY
+[{src:'Encocao de camaron.png',l:'Encocado de Camarón'},{src:'Sancocho de gallina.jpg',l:'Sancocho de Gallina'},{src:'Bandeja Paisa.jpg',l:'Bandeja Paisa'},{src:'Pastel chocuano.png',l:'Pastel Chocoano'},{src:'Cazuela de marisco.jpg',l:'Cazuela de Mariscos'},{src:'Arroz con longaniza.jpg',l:'Arroz con Longaniza'}].forEach(g=>{
+  const d=document.createElement('div');d.className='gitem';
+  d.innerHTML=`<img src="${g.src}" alt="${g.l}" loading="lazy"><div class="gov"><span>${g.l}</span></div>`;
+  d.onclick=()=>{const lb=document.createElement('div');lb.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9999;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:16px';lb.innerHTML=`<div style="position:relative"><img src="${g.src}" style="max-width:92vw;max-height:86vh;border-radius:14px;display:block"><button style="position:absolute;top:-10px;right:-10px;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.15);border:none;color:#fff;font-size:16px;cursor:pointer" onclick="event.stopPropagation();this.parentElement.parentElement.remove()">✕</button></div>`;lb.onclick=()=>lb.remove();document.body.appendChild(lb);};
+  document.getElementById('galleryGrid').appendChild(d);
+});
+
+// REVIEWS
+let rvStars=5;
+document.querySelectorAll('.star').forEach(s=>{s.onclick=()=>{rvStars=+s.dataset.s;document.querySelectorAll('.star').forEach((x,i)=>x.classList.toggle('sel',i<rvStars));};});
+function loadReviews(){
+  const saved=JSON.parse(localStorage.getItem('lp_reviews')||'[]');
+  const def=[{name:'María C.',text:'El encocado tiene alma. Volvimos con toda la familia.',stars:5},{name:'Juan S.',text:'Sabor auténtico y servicio muy amable. ¡Recomendado!',stars:5}];
+  const list=saved.length?saved:def;
+  document.getElementById('reviewsGrid').innerHTML=list.slice(0,6).map(r=>`<div class="rvcard"><div class="rv-stars">${'⭐'.repeat(r.stars||5)}</div><p class="rv-text">"${r.text}"</p><div class="rv-name">${r.name}</div></div>`).join('');
+}
+function submitReview(e){
+  e.preventDefault();
+  const name=document.getElementById('rvName').value.trim(),text=document.getElementById('rvText').value.trim();
+  if(!name||!text)return;
+  const saved=JSON.parse(localStorage.getItem('lp_reviews')||'[]');
+  saved.unshift({name,text,stars:rvStars});localStorage.setItem('lp_reviews',JSON.stringify(saved));
+  document.getElementById('rvForm').reset();loadReviewsFromAPI();showToast('¡Gracias por tu reseña!','ok');
+}
+function clearReviews(){localStorage.removeItem('lp_reviews');loadReviewsFromAPI();showToast('Reseñas reiniciadas','ok');}
+
+// FAQ
+function toggleFaq(el){el.closest('.faq-item').classList.toggle('open');}
+
+// RESERVA
+function submitReserva(e){
+  e.preventDefault();
+  const msg=encodeURIComponent(`¡Hola! Quiero reservar:\nNombre: ${document.getElementById('rName').value}\nTel: ${document.getElementById('rTel').value}\nFecha: ${document.getElementById('rDate').value}\nHora: ${document.getElementById('rTime').value}\nPersonas: ${document.getElementById('rPeople').value}\nOcasión: ${document.getElementById('rOcasion').value||'Ninguna'}\nNotas: ${document.getElementById('rNotes').value||'Ninguna'}`);
+  window.open(`https://wa.me/573106684360?text=${msg}`,'_blank');
+  e.target.reset();showToast('¡Reserva enviada por WhatsApp!','ok');
+}
+
+// NEWSLETTER
+function subNews(e){e.preventDefault();const email=document.getElementById('nlEmail').value.trim();const l=JSON.parse(localStorage.getItem('lp_news')||'[]');l.push({email,date:new Date().toISOString()});localStorage.setItem('lp_news',JSON.stringify(l));e.target.reset();showToast('¡Suscrito correctamente!','ok');}
+
+// INIT
+document.addEventListener('DOMContentLoaded',()=>{
+  if(window.AOS)AOS.init({duration:650,once:true,offset:70});
+  initReveal();initBackTop();initTheme();
+  loadMenuFromAPI();renderCart();loadReviewsFromAPI();hidePreloader();
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeCart();}});
+});
+window.addEventListener('load',()=>{if(window.AOS)AOS.refresh();});
+</script>
+</body>
+</html>
+<script>
+/* ── Carga menú desde API (con fallback a datos locales) ── */
+async function loadMenuFromAPI() {
+  try {
+    const cat  = activeCat;
+    const q    = document.getElementById('searchInput')?.value.trim() || '';
+    const sort = document.getElementById('sortSelect')?.value || '';
+    const res  = await API.platos.list(cat, q, sort);
+    if (res.ok && res.data.length) {
+      // Mapear campos BD → formato frontend
+      const list = res.data.map(p => ({
+        id:      p.id,
+        nombre:  p.nombre,
+        cat:     p.cat_slug,
+        precio:  parseFloat(p.precio),
+        img:     p.imagen,
+        desc:    p.descripcion,
+        ingred:  (p.ingredientes || '').split(','),
+        peso:    p.peso,
+        cal:     p.calorias,
+        popular: !!p.popular
+      }));
+      renderMenu(list);
+    } else {
+      renderMenu(PLATOS); // fallback local
+    }
+  } catch {
+    renderMenu(PLATOS);
+  }
+}
+
+/* ── Cargar reseñas desde API ── */
+async function loadReviewsFromAPI() {
+  try {
+    const res = await API.resenas.list();
+    if (res.ok && res.data.length) {
+      document.getElementById('reviewsGrid').innerHTML = res.data.map(r =>
+        `<div class="rvcard">
+          <div class="rv-stars">${'⭐'.repeat(r.estrellas||5)}</div>
+          <p class="rv-text">"${r.texto}"</p>
+          <div class="rv-name">${r.nombre}</div>
+        </div>`
+      ).join('');
+    } else {
+      loadReviews();
+    }
+  } catch { loadReviews(); }
+}
+
+/* ── Guardar reseña en BD ── */
+const _origSubmitReview = window.submitReview;
+window.submitReview = async function(e) {
+  e.preventDefault();
+  const nombre   = document.getElementById('rvName').value.trim();
+  const texto    = document.getElementById('rvText').value.trim();
+  if (!nombre || !texto) return;
+  try {
+    const res = await API.resenas.create({ nombre, texto, estrellas: rvStars });
+    if (res.ok) {
+      document.getElementById('rvForm').reset();
+      loadReviewsFromAPI();
+      showToast('¡Gracias por tu reseña!', 'ok');
+    } else {
+      showToast(res.error || 'Error al enviar', 'error');
+    }
+  } catch { _origSubmitReview(e); }
+};
+
+/* ── Guardar reserva en BD ── */
+const _origSubmitReserva = window.submitReserva;
+window.submitReserva = async function(e) {
+  e.preventDefault();
+  const data = {
+    nombre:   document.getElementById('rName').value,
+    telefono: document.getElementById('rTel').value,
+    fecha:    document.getElementById('rDate').value,
+    hora:     document.getElementById('rTime').value,
+    personas: parseInt(document.getElementById('rPeople').value),
+    ocasion:  document.getElementById('rOcasion').value,
+    notas:    document.getElementById('rNotes').value,
+  };
+  try {
+    const res = await API.reservas.create(data);
+    if (res.ok) {
+      // También enviar WhatsApp
+      const msg = encodeURIComponent(`¡Hola! Quiero reservar:\nNombre: ${data.nombre}\nTel: ${data.telefono}\nFecha: ${data.fecha}\nHora: ${data.hora}\nPersonas: ${data.personas}\nOcasión: ${data.ocasion||'Ninguna'}`);
+      window.open(`https://wa.me/573106684360?text=${msg}`, '_blank');
+      e.target.reset();
+      showToast('¡Reserva guardada y enviada por WhatsApp!', 'ok');
+    } else {
+      showToast(res.error || 'Error al guardar reserva', 'error');
+    }
+  } catch { _origSubmitReserva(e); }
+};
+
+/* ── Newsletter en BD ── */
+const _origSubNews = window.subNews;
+window.subNews = async function(e) {
+  e.preventDefault();
+  const email = document.getElementById('nlEmail').value.trim();
+  try {
+    const res = await API.newsletter.subscribe(email);
+    e.target.reset();
+    showToast(res.ok ? '¡Suscrito correctamente!' : (res.error || 'Error'), res.ok ? 'ok' : 'error');
+  } catch { _origSubNews(e); }
+};
+
+/* ── Checkout: guardar pedido en BD ── */
+const _origCheckout = window.checkout;
+window.checkout = async function() {
+  if (!cart.length) { showToast('Agrega algo primero 🍽️', 'error'); return; }
+  const session = JSON.parse(sessionStorage.getItem('lp_session') || '{}');
+  const data = {
+    nombre_cliente: session.name || 'Cliente',
+    telefono:       '',
+    tipo:           'whatsapp',
+    items: cart.map(i => ({ plato_id: i.id, cantidad: i.qty }))
+  };
+  try {
+    await API.pedidos.create(data);
+  } catch {}
+  // Siempre abrir WhatsApp también
+  _origCheckout();
+};
+
+/* ── Recargar menú al cambiar filtros (sobrescribir filterMenu) ── */
+const _origFilterMenu = window.filterMenu;
+window.filterMenu = function() {
+  loadMenuFromAPI();
+};
+</script>
