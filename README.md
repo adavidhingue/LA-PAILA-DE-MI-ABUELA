@@ -4,3 +4,16 @@ La Paila de Mi Abuela es un sitio web diseñado para promocionar un restaurante 
 
 # FIGMA — Diseño de la interfaz
 [VER EL DISEÑO FIGMA] (https://www.figma.com/make/Wl5cBsdLdXdm2GEb0zlmYt/Create-Figma-design?t=9d22sLSRPs5tk1fu-1)
+
+
+
+
+
+
+
+
+
+
+
+
+# QUIDBO, CHOCO - COLOMBIA
